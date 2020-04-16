@@ -1,0 +1,137 @@
+Hadoop 2.x yarn cluster installation on ubuntu/Centos7/Redhat/Fedora.
+
+
+1. Install JAVA
+
+download latest jdk
+
+https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
+2. Extract tar file
+
+tar -xvf jdk..tar.gz
+
+3. Set the environment variables
+
+vi ~/.bashrc or
+vi /etc/profile
+
+export JAVA_HOME=/usr/local/jdk1.8.0_30/
+export PATH=$PATH:/usr/local/jdk1.8.0_30/bin 
+
+source /etc/profile
+
+4. check java is running or not
+
+jps – service check 
+java -version 
+javac -version
+
+5. Install hadoop 2.x
+
+download hadoop 
+
+https://archive.apache.org/dist/hadoop/core/hadoop-2.6.0/hadoop-2.6.0.tar.gz
+
+6. extract file /usr/local
+
+tar -xvf hadoop-2.6.0.tar.gz
+
+cd extracted folder name (hadoop-2.6.0)
+
+ls
+
+7. Set the environment Variables
+
+vim /etc/profile or
+vi ~/.bashrc
+
+
+export HADOOP_HOME=/usr/local/hadoop-2.7.3
+export HADOOP_INSTALL=$HADOOP_HOME
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
+
+
+8. Set JAVA path in hadoop-env.sh
+
+export JAVA_HOME=/usr/local/jdk1.8.*
+
+9. Configure the xml files -
+
+1. core-site.xml
+
+<configuration>
+<property>
+<name>fs.default.name</name>
+<value>hdfs://localhost:9000</value>
+</property>
+</configuration>
+
+2. hdfs-site.xml
+
+<configuration>
+<property>
+<name>dfs.replication</name>
+<value>1</value>
+</property>
+<property>
+<name>dfs.name.dir</name>
+<value>file:///home/hadoop/hadoopdata/hdfs/namenode</value>
+</property>
+<property>
+<name>dfs.data.dir</name>
+<value>file:///home/hadoop/hadoopdata/hdfs/datanode</value>
+</property>
+</configuration>
+
+
+3. Mapred-site.xml-----------→ not showing in hadoop2.6
+
+If not shown in configuration
+
+cp mapred-site.template.xml  mapred-site.xml
+
+<configuration>
+<property>
+<name>mapreduce.framework.name</name>
+<value>yarn</value>
+</property>
+</configuration>
+
+4. yarn-site.xml
+
+<configuration>
+<property>
+<name>yarn.nodemanager.aux-services</name>
+<value>mapreduce_shuffle</value>
+</property>
+</configuration>
+
+10. format the namenode
+
+hdfs namenode -format
+
+status-----→ 0 then namenode formate .
+
+11. go to sbin
+
+cd /usr/local/hadoop2.6.0/sbin
+
+12.  start dfs components
+
+sh start-dfs.sh
+
+13. start yarn components
+
+sh start-yarn.sh
+
+14.  HDFS GUI
+
+localhost:50070
+
+
