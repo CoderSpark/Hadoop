@@ -1,0 +1,80 @@
+1. List files in the path of the file system
+
+hadoop fs -ls <Path> or hdfs dfs -ls <Path>  
+
+2. alters the permission of a file where <arg> is the binary arguments e.g.777
+
+hadoop fs -chmod <arg> <file or dir>
+
+3. Change the owner of a file 
+
+hadoop fs -chown <owner>:<group><file-or-dir>
+
+4. make a directory on the file system
+
+hadoop fs -mkdir <path>
+
+5. Copy a file to the local storage onto file system
+
+hadoop fs -put <local-origin> <destination>
+
+hadoop fs -copyFromLocal <local-origin> <destination>
+
+6. create an empty file on the file system
+
+hadoop fs -touchz
+
+hadoop fs -cat <file> copy file to stout
+
+7. fsck command is used to check the HDFS file system
+
+Hadoop fsck /
+
+8. It displays all the files in HDFS while checking.
+hadoop fsck / -files
+
+9. It displays all the blocks of the files while checking.
+hadoop fsck / -files -blocks
+
+10. This command will delete the corrupted files in HDFS.
+hadoop fsck -delete
+
+11. This command is used to return the file system information and its statistics.
+hadoop dfsadmin -report
+
+12. This command is used to save the meta data that is present in the namenode in a file in the HDFS. 
+hadoop dfsadmin -metasave file_name.txt
+
+13. This command is used to refresh the data nodes that are allowed to connect to the name node. 
+
+hadoop dfsadmin -refreshNodes
+
+14. hadoop fs -count -q /sample1
+
+hadoop fs -count -q /sample1
+15. Run a Cluster Balancing Utility 
+hadoop balancer
+
+16. For Help 
+hadoop fs -help
+
+17. The command ‘rm’ will delete the file stored inside the HDFS.
+hadoop dfs –rm </path[filename]>
+
+18. Check Directory Space in HDFS
+hadoop dfs -du -s -h </file path>
+
+19. List all the Hadoop File System Shell Commands
+hadoop fs
+
+
+
+
+Hadoop Safe Mode (Maintenance Mode) Commands
+
+1. This command is used to enter safe mode. 
+hadoop dfsadmin -safe mode enter
+2. This command is used to leave safe mode.
+hadoop dfsadmin -safemode leave
+3. This command is used to get the status of the safe mode.
+hadoop dfsadmin -safemode get
